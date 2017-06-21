@@ -1,0 +1,17 @@
+.masthead
+    background-color: rgb(150, 17, 17);
+    color: white;
+    margin-bottom: 100px;
+    min-height: 400px;
+    text-align: center;
+
+.header
+    font-family: sans;
+    margin-top: 150px;
+    margin-bottom: 50px;
+    font-size: 4em;
+    #cuenca
+        font-weight: bold;
+    #trip
+        font-weight: 100;
+        margin-left: -15px;

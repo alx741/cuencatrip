@@ -1,0 +1,9 @@
+<div .masthead>
+    <div .container>
+        <div .row>
+            <h1 .header>
+                <span #cuenca>CUENCA
+                <span #trip>TRIP
+            <h2>
+                Disfruta, conoce y recomienda todo lo que Cuenca tiene para
+                ofrecer!
