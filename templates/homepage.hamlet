@@ -1,9 +1,21 @@
 <div .masthead>
-    <div .container>
-        <div .row>
-            <h1 .header>
+    <div .container-fluid>
+        <div #flag-red .row>
+            <h1 #header>
                 <span #cuenca>CUENCA
                 <span #trip>TRIP
-            <h2>
-                Disfruta, conoce y recomienda todo lo que Cuenca tiene para
-                ofrecer!
+        <div #flag-yellow .row>
+            <div .col-sm-offset-3 .col-sm-6>
+                <h2 #motto>
+                    Disfruta, conoce y recomienda todo lo que Cuenca tiene para
+                    ofrecer!
+
+
+<div #position .container-fluid>
+    <div .row>
+        <div .col-sm-offset-1 .col-sm-10>
+            <h3> Dejanos saber dónde te encuentras
+            <div #map .embed-responsive .embed-responsive-16by9>
+            <a #continue .btn .btn-disabled href="#">Continuar
+
+<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCejW_WHaj2r4zCeLy8iB7gOsiLly_YgcU&callback=initMap">

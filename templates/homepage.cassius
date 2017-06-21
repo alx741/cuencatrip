@@ -1,17 +1,45 @@
 .masthead
-    background-color: rgb(150, 17, 17);
     color: white;
-    margin-bottom: 100px;
-    min-height: 400px;
     text-align: center;
+    #flag-red
+        background-color: #c60b1d;
+        min-height: 200px;
+    #flag-yellow
+        background-color: #ffc400;
+        margin-bottom: 80px;
+        min-height: 200px;
 
-.header
+#header
     font-family: sans;
-    margin-top: 150px;
-    margin-bottom: 50px;
     font-size: 4em;
+    margin-top: 65px;
     #cuenca
         font-weight: bold;
     #trip
         font-weight: 100;
         margin-left: -15px;
+
+#motto
+    font-weight: bold;
+    margin-top: 65px;
+
+#position
+    text-align: center;
+    h3
+        text-align: center;
+        margin-bottom: 50px;
+    #continue, a
+        border: none;
+        color: white;
+        font-size: 1.5em;
+        font-weight: bold;
+        margin-top: 30px;
+        width: 100%;
+    #continue:hover
+        color: white;
+    .btn-disabled
+        background-color: gray;
+    .btn-red
+        background-color: #c60b1d;
+    .btn-red:hover
+        background-color: #a60b1d;

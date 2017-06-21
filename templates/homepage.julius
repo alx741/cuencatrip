@@ -1,0 +1,38 @@
+var place = {lat: -2.8975818, lng: -79.014102};
+var marker = 0;
+var userpos = null;
+
+function initMap() {
+    var map = new google.maps.Map(document.getElementById('map'), {
+        zoom: 13,
+        center: place,
+        mapTypeId: 'hybrid',
+        scrollwheel: false,
+        mapTypeControl: false,
+        scaleControl: false,
+        rotateControl: false,
+        streetViewControl: false,
+        fullscreenControl: false,
+        zoomControl: true
+    });
+
+    google.maps.event.addListener(map, 'click', function(event) {
+        userpos = {lat: event.latLng.lat(), long: event.latLng.lng()};
+        $('#continue').attr('href', "@{HomeR}");
+        placeMarker(event.latLng);
+    });
+
+    function placeMarker(location) {
+        if (! marker == 0){
+            marker.setMap(null);
+        }
+        marker = new google.maps.Marker({
+            position: location,
+            map: map
+        });
+
+        map.setCenter(location);
+        $('#continue').removeClass('btn-disabled');
+        $('#continue').addClass('btn-red');
+    }
+}
