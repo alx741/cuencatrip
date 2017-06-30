@@ -16,11 +16,11 @@ getPlacesR = do
 
     lat <- case mlat of
             Nothing -> redirect HomeR
-            Just x -> return x
+            Just x -> return $ rawJS x
 
     long <- case mlong of
             Nothing -> redirect HomeR
-            Just x -> return x
+            Just x -> return $ rawJS x
 
     defaultLayout $ do
         $(widgetFile "places")
