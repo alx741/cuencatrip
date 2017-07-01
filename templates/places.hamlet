@@ -1,16 +1,36 @@
 <div #icons .container-fluid>
     <div .row>
-        <div .col-sm-offset-2 .col-sm-8>
-            <img .icon src=@{StaticR img_bar_icon_png}>
-            <img .icon src=@{StaticR img_cafe_icon_png}>
-            <img .icon src=@{StaticR img_hotel_icon_png}>
-            <img .icon src=@{StaticR img_restaurant_icon_png}>
-            <img .icon src=@{StaticR img_museum_icon_png}>
-            <img .icon src=@{StaticR img_shop_icon_png}>
+        <div .col-xs-offset-2 .col-xs-8>
+            <div .col-xs-4 .col-sm-2>
+                <img .icon .icon-disabled .img-responsive src=@{StaticR img_bar_icon_png}>
+            <div .col-xs-4 .col-sm-2>
+                <img .icon .icon-disabled .img-responsive src=@{StaticR img_cafe_icon_png}>
+            <div .col-xs-4 .col-sm-2>
+                <img .icon .icon-disabled .img-responsive src=@{StaticR img_hotel_icon_png}>
+            <div .col-xs-4 .col-sm-2>
+                <img .icon .icon-disabled .img-responsive src=@{StaticR img_restaurant_icon_png}>
+            <div .col-xs-4 .col-sm-2>
+                <img .icon .icon-disabled .img-responsive src=@{StaticR img_museum_icon_png}>
+            <div .col-xs-4 .col-sm-2>
+                <img .icon .icon-disabled .img-responsive src=@{StaticR img_shop_icon_png}>
 
 <div #position .container-fluid>
     <div .row>
         <div .col-sm-offset-2 .col-sm-8>
             <div #map .embed-responsive .embed-responsive-16by9>
+
+<div #places .container-fluid>
+    <div .row>
+        <div .place .col-sm-offset-2 .col-sm-8>
+            <div .place-info .col-sm-6>
+                <h4 .place-name>Place
+                <span .place-rating>Calificación: 4.3
+            <div .place-stars .col-sm-6>
+                <img #star1 .star .star-disabled src=@{StaticR img_star_png}>
+                <img #star2 .star .star-disabled src=@{StaticR img_star_png}>
+                <img #star3 .star .star-disabled src=@{StaticR img_star_png}>
+                <img #star4 .star .star-disabled src=@{StaticR img_star_png}>
+                <img #star5 .star .star-disabled src=@{StaticR img_star_png}>
+
 
 <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCejW_WHaj2r4zCeLy8iB7gOsiLly_YgcU&callback=initMap">

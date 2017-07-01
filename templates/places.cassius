@@ -1,3 +1,28 @@
 #icons
+    margin-top: 50px;
+    margin-bottom: 50px;
     .icon
-        max-width: 100px;
+        padding: 10px;
+    .icon:hover
+        filter: grayscale(0);
+    .icon-disabled
+        filter: grayscale(100);
+
+#places
+    margin-top: 50px;
+    .place
+        padding: 10px;
+        border: solid 2px #ffc400;
+        border-radius: 5px;
+    .place-name
+        font-size: 1.5em;
+        font-weight: bold;
+    .place-rating
+        font-style: italic;
+    .star
+        max-width: 30px;
+        margin: 5px;
+    .star:hover
+        filter: grayscale(0);
+    .star-disabled
+        filter: grayscale(100);
