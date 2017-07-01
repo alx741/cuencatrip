@@ -7,15 +7,14 @@
         font-family: sans;
         font-size: 4em;
         margin-top: 65px;
-        a:hover
-            text-decoration: none;
-        #cuenca
-            color: white;
-            font-weight: bold;
-        #trip
-            color: white;
-            font-weight: 100;
-            margin-left: -15px;
+    a, a:hover, a:active, a:visited
+        color: white;
+        text-decoration: none;
+    #cuenca
+        font-weight: bold;
+    #trip
+        font-weight: 100;
+        margin-left: -15px;
 
 #icons
     margin-top: 50px;
