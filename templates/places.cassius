@@ -1,3 +1,22 @@
+#flag-red
+    background-color: #c60b1d;
+    color: white;
+    min-height: 200px;
+    text-align: center;
+    #header
+        font-family: sans;
+        font-size: 4em;
+        margin-top: 65px;
+        a:hover
+            text-decoration: none;
+        #cuenca
+            color: white;
+            font-weight: bold;
+        #trip
+            color: white;
+            font-weight: 100;
+            margin-left: -15px;
+
 #icons
     margin-top: 50px;
     margin-bottom: 50px;

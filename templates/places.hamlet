@@ -1,3 +1,10 @@
+<div .container-fluid>
+    <div #flag-red .row>
+        <a href=@{HomeR}>
+            <h1 #header>
+                <span #cuenca>CUENCA
+                <span #trip>TRIP
+
 <div #icons .container-fluid>
     <div .row>
         <div .col-xs-offset-2 .col-xs-8>
