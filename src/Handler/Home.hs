@@ -30,7 +30,7 @@ getHomeR = do
     defaultLayout $ do
         let (commentFormId, commentTextareaId, commentListId) = commentIds
         aDomId <- newIdent
-        setTitle "CUENCATRIP"
+        setTitle "CuencaTrip"
         $(widgetFile "homepage")
 
 postHomeR :: Handler Html

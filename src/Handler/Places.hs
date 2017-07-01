@@ -23,4 +23,5 @@ getPlacesR = do
             Just x -> return $ rawJS x
 
     defaultLayout $ do
+        setTitle "CuencaTrip"
         $(widgetFile "places")
