@@ -1,14 +1,16 @@
-<div .masthead>
-    <div .container-fluid>
-        <!-- #{lat} -->
-
-        <!-- <br> -->
-        <!-- <br> -->
-        <!-- #{long} -->
+<div #icons .container-fluid>
+    <div .row>
+        <div .col-sm-offset-2 .col-sm-8>
+            <img .icon src=@{StaticR img_bar_icon_png}>
+            <img .icon src=@{StaticR img_cafe_icon_png}>
+            <img .icon src=@{StaticR img_hotel_icon_png}>
+            <img .icon src=@{StaticR img_restaurant_icon_png}>
+            <img .icon src=@{StaticR img_museum_icon_png}>
+            <img .icon src=@{StaticR img_shop_icon_png}>
 
 <div #position .container-fluid>
     <div .row>
-        <div .col-sm-offset-1 .col-sm-10>
+        <div .col-sm-offset-2 .col-sm-8>
             <div #map .embed-responsive .embed-responsive-16by9>
 
 <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCejW_WHaj2r4zCeLy8iB7gOsiLly_YgcU&callback=initMap">
