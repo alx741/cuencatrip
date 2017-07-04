@@ -1,6 +1,9 @@
 name:    cuencatrip
 version: "0.0.0"
 
+default-extensions:
+  - ViewPatterns
+
 dependencies:
 
 # Due to a bug in GHC 8.0.1, we block its usage
@@ -46,6 +49,9 @@ dependencies:
 - case-insensitive
 - wai
 - foreign-store
+- parsec
+- parsec-numeric
+
 
 # The library contains all of our application code. The executable
 # defined below is just a thin wrapper.
