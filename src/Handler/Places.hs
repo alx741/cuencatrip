@@ -21,6 +21,9 @@ import Text.Parsec.Token
 import Text.ParserCombinators.Parsec.Numeric
 import Place
 
+radius :: Int
+radius = 1000
+
 data PlaceData = PlaceData
     { placeName :: String
     , placeLat :: Double
@@ -42,9 +45,11 @@ instance FromJSON Coordinate
 
 getPlacesR :: Place -> Handler Value
 getPlacesR _ = do
+    (lng, lat) <- coordParam
     let sql = "select name, raters, rating, ST_AsText(shop.geog) from shop "
-            ++ "where ST_Distance(shop.geog, ST_Point(-79.00789260776946, -2.9026843924063)) < 1000"
-            -- "AND shop.shop= 'supermarket'"
+            ++ "where ST_Distance(shop.geog, ST_Point("
+            ++ lng ++ ", " ++ lat ++ ")) < " ++ pack (show radius) ++ " "
+            ++ "AND shop.shop = 'supermarket'"
     runDB $ rawQuery sql [] $$ CL.mapM_ (liftIO . print)
     coordinate <- case parse coordinateParser "" "POINT(-79.0209324 -2.8976525)" of
             Left err -> notFound
@@ -69,7 +74,7 @@ getCuencaR = do
 coordParam :: Handler (Text, Text)
 coordParam = do
     mlat <- lookupGetParam "lat"
-    mlng <- lookupGetParam "long"
+    mlng <- lookupGetParam "lng"
 
     lat <- case mlat of
             Nothing -> redirect HomeR
