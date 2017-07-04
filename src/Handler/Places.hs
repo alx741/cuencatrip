@@ -12,6 +12,7 @@ import Text.Julius (RawJS (..))
 import Database.Persist.Sql
 import Data.Conduit
 import Prelude (read)
+import qualified Data.Conduit as C
 import qualified Data.Conduit.List as CL
 import Text.Parsec
 import Text.Parsec.Text
@@ -25,9 +26,8 @@ radius :: Int
 radius = 1000
 
 data PlaceData = PlaceData
-    { placeName :: String
-    , placeLat :: Double
-    , placeLng :: Double
+    { placeName :: Text
+    , placeCoor :: Coordinate
     , placeRating :: Float
     } deriving (Generic, Show)
 
@@ -36,8 +36,8 @@ instance FromJSON PlaceData
 
 
 data Coordinate = Coordinate
-    { lat :: Double
-    , lng :: Double
+    { coorLat :: Double
+    , coorLng :: Double
     } deriving (Generic, Show, Read, Eq)
 
 instance ToJSON Coordinate
@@ -51,11 +51,18 @@ getPlacesR place = do
             ++ " where ST_Distance(" ++ geog place ++ ", ST_Point("
             ++ lng ++ ", " ++ lat ++ ")) < " ++ pack (show radius)
             ++ " AND " ++ Place.filter place
-    runDB $ rawQuery sql [] $$ CL.mapM_ (liftIO . print)
-    coordinate <- case parse coordinateParser "" "POINT(-79.0209324 -2.8976525)" of
-            Left err -> notFound
-            Right coor -> return coor
-    return $ toJSON coordinate
+    queryResult <- runDB $ rawQuery sql [] $$ CL.consume
+    return $ toJSON $ fmap getPlaceData queryResult
+    where
+        getPlaceData :: [PersistValue] -> PlaceData
+        getPlaceData (PersistText name : _ : PersistRational rating : PersistText coor : rest) =
+            PlaceData name (parseCoordinate coor) $ fromRational rating
+
+        parseCoordinate :: Text -> Coordinate
+        parseCoordinate coorText =
+            case parse coordinateParser "" coorText of
+                    Left e -> error $ show e
+                    Right coor -> coor
 
 coordinateParser :: Parser Coordinate
 coordinateParser = do
