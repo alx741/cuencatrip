@@ -16,9 +16,10 @@ data Place
     deriving (Show, Read, Eq)
 
 class IsOnDB a where
+    filter :: a -> Text
+    geog :: a -> Text
     isOnTable :: a -> Text
     isOnAttribute :: a -> Text
-    filter :: a -> Text
 
 instance IsOnDB Place where
     isOnTable Bar = "amenity"
@@ -34,6 +35,13 @@ instance IsOnDB Place where
     isOnAttribute Restaurant = isOnTable Restaurant
     isOnAttribute Museum = isOnTable Museum
     isOnAttribute Shop = isOnTable Shop
+
+    geog Bar = toGeog $ isOnTable Bar
+    geog Cafe = toGeog $ isOnTable Cafe
+    geog Hotel = toGeog $ isOnTable Hotel
+    geog Restaurant = toGeog $ isOnTable Restaurant
+    geog Museum = toGeog $ isOnTable Museum
+    geog Shop = toGeog $ isOnTable Shop
 
     filter Bar = toSQLOred Bar filters
         where filters = ["bar"]
@@ -78,6 +86,9 @@ toSQLOred p tx = T.drop 3 $ T.concat
     $ fmap ((flip T.snoc) '\'')
     $ fmap (T.append ored) tx
     where ored = T.concat [" OR ", isOnTable p, ".", isOnAttribute p, " = '"]
+
+toGeog :: Text -> Text
+toGeog t = T.append t ".geog"
 
 instance PathPiece Place where
     fromPathPiece t = readMay t

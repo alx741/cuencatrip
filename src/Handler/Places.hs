@@ -44,12 +44,13 @@ instance ToJSON Coordinate
 instance FromJSON Coordinate
 
 getPlacesR :: Place -> Handler Value
-getPlacesR _ = do
+getPlacesR place = do
     (lng, lat) <- coordParam
-    let sql = "select name, raters, rating, ST_AsText(shop.geog) from shop "
-            ++ "where ST_Distance(shop.geog, ST_Point("
-            ++ lng ++ ", " ++ lat ++ ")) < " ++ pack (show radius) ++ " "
-            ++ "AND shop.shop = 'supermarket'"
+    let sql = "select name, raters, rating, ST_AsText("
+            ++ geog place ++ ") from " ++ isOnTable place
+            ++ " where ST_Distance(" ++ geog place ++ ", ST_Point("
+            ++ lng ++ ", " ++ lat ++ ")) < " ++ pack (show radius)
+            ++ " AND " ++ Place.filter place
     runDB $ rawQuery sql [] $$ CL.mapM_ (liftIO . print)
     coordinate <- case parse coordinateParser "" "POINT(-79.0209324 -2.8976525)" of
             Left err -> notFound
