@@ -1,5 +1,6 @@
 var userpos = {lat: #{lat}, lng: #{lng}};
 var map;
+var markers = [];
 
 function initMap() {
     map = new google.maps.Map(document.getElementById('map'), {
@@ -33,15 +34,27 @@ function initMap() {
     });
 }
 
-function addMarker(location) {
-    var marker = new google.maps.Marker({
+function addMarker(location)
+{
+    mark = new google.maps.Marker({
         position: location,
         map: map
     });
+
+    markers.push(mark);
+}
+
+function wipeMarkers()
+{
+    for (var i = 0; i < markers.length; i++)
+    {
+        markers[i].setMap(null);
+    }
 }
 
 function getPlaces(place) {
     var placeURL;
+    wipeMarkers();
 
     switch (place)
     {
@@ -79,6 +92,26 @@ function getPlaces(place) {
         }
     );
 }
+
+$("#bar").click(function() {
+    getPlaces("bar");
+});
+
+$("#cafe").click(function() {
+    getPlaces("cafe");
+});
+
+$("#hotel").click(function() {
+    getPlaces("hotel");
+});
+
+$("#restaurant").click(function() {
+    getPlaces("restaurant");
+});
+
+$("#museum").click(function() {
+    getPlaces("museum");
+});
 
 $("#shop").click(function() {
     getPlaces("shop");
