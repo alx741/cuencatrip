@@ -82,7 +82,7 @@ instance IsOnDB Place where
                 ]
 
 toSQLOred :: (IsOnDB a) => a -> [Text] -> Text
-toSQLOred p tx = T.drop 3 $ T.concat
+toSQLOred p tx = T.cons '(' $ (flip T.snoc) ')' $ T.drop 3 $ T.concat
     $ fmap ((flip T.snoc) '\'')
     $ fmap (T.append ored) tx
     where ored = T.concat [" OR ", isOnTable p, ".", isOnAttribute p, " = '"]
