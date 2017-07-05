@@ -9,17 +9,17 @@
     <div .row>
         <div .col-xs-offset-2 .col-xs-8>
             <div .col-xs-4 .col-sm-2>
-                <img .icon .icon-disabled .img-responsive src=@{StaticR img_bar_icon_png}>
+                <img #bar .icon .icon-disabled .img-responsive src=@{StaticR img_bar_icon_png}>
             <div .col-xs-4 .col-sm-2>
-                <img .icon .icon-disabled .img-responsive src=@{StaticR img_cafe_icon_png}>
+                <img #cafe .icon .icon-disabled .img-responsive src=@{StaticR img_cafe_icon_png}>
             <div .col-xs-4 .col-sm-2>
-                <img .icon .icon-disabled .img-responsive src=@{StaticR img_hotel_icon_png}>
+                <img #hotel .icon .icon-disabled .img-responsive src=@{StaticR img_hotel_icon_png}>
             <div .col-xs-4 .col-sm-2>
-                <img .icon .icon-disabled .img-responsive src=@{StaticR img_restaurant_icon_png}>
+                <img #restaurant .icon .icon-disabled .img-responsive src=@{StaticR img_restaurant_icon_png}>
             <div .col-xs-4 .col-sm-2>
-                <img .icon .icon-disabled .img-responsive src=@{StaticR img_museum_icon_png}>
+                <img #museum .icon .icon-disabled .img-responsive src=@{StaticR img_museum_icon_png}>
             <div .col-xs-4 .col-sm-2>
-                <img .icon .icon-disabled .img-responsive src=@{StaticR img_shop_icon_png}>
+                <img #shop .icon .icon-disabled .img-responsive src=@{StaticR img_shop_icon_png}>
 
 <div #position .container-fluid>
     <div .row>

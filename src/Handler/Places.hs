@@ -55,8 +55,9 @@ getPlacesR place = do
     return $ toJSON $ fmap getPlaceData queryResult
     where
         getPlaceData :: [PersistValue] -> PlaceData
-        getPlaceData (PersistText name : _ : PersistRational rating : PersistText coor : rest) =
+        getPlaceData (PersistText name : _ : PersistRational rating : PersistText coor : _) =
             PlaceData name (parseCoordinate coor) $ fromRational rating
+        getPlaceData _ = error "Malformed GeoDB row"
 
         parseCoordinate :: Text -> Coordinate
         parseCoordinate coorText =

@@ -1,7 +1,8 @@
 var userpos = {lat: #{lat}, lng: #{lng}};
+var map;
 
 function initMap() {
-    var map = new google.maps.Map(document.getElementById('map'), {
+    map = new google.maps.Map(document.getElementById('map'), {
         zoom: 15,
         center: userpos,
         mapTypeId: 'hybrid',
@@ -14,10 +15,11 @@ function initMap() {
         zoomControl: true
     });
 
-    var marker = new google.maps.Marker({
-        position: userpos,
-        map: map
-    });
+    /* var marker = new google.maps.Marker({ */
+    /*     position: userpos, */
+    /*     map: map */
+    /* }); */
+    /* addMarker(userpos, map); */
 
     var radius = new google.maps.Circle({
         strokeColor: '#FF0000',
@@ -30,3 +32,54 @@ function initMap() {
         radius: 1000
     });
 }
+
+function addMarker(location) {
+    var marker = new google.maps.Marker({
+        position: location,
+        map: map
+    });
+}
+
+function getPlaces(place) {
+    var placeURL;
+
+    switch (place)
+    {
+        case "bar":
+            placeURL = "@{PlacesR Bar}"
+            break;
+        case "cafe":
+            placeURL = "@{PlacesR Cafe}"
+            break;
+        case "hotel":
+            placeURL = "@{PlacesR Hotel}"
+            break;
+        case "restaurant":
+            placeURL = "@{PlacesR Restaurant}"
+            break;
+        case "museum":
+            placeURL = "@{PlacesR Museum}"
+            break;
+        case "shop":
+            placeURL = "@{PlacesR Shop}"
+            break;
+        default:
+            placeURL = "@{HomeR}"
+    }
+
+    $.getJSON(placeURL  + "?lat=" + userpos.lat + "&lng=" + userpos.lng,
+        function(data){
+            places = data;
+
+            for (var i = 0; i < places.length; i++)
+            {
+                addMarker({lat: places[i].placeCoor.coorLat, lng: places[i].placeCoor.coorLng});
+            }
+
+        }
+    );
+}
+
+$("#shop").click(function() {
+    getPlaces("shop");
+});
