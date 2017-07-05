@@ -5,29 +5,27 @@
                 <span #cuenca>CUENCA
                 <span #trip>TRIP
 
-<div #icons .container-fluid>
-    <div .row>
+<div #vueapp .container-fluid>
+    <div #icons .row>
         <div .col-xs-offset-2 .col-xs-8>
             <div .col-xs-4 .col-sm-2>
-                <img #bar .icon .icon-disabled .img-responsive src=@{StaticR img_bar_icon_png}>
+                <img #bar .icon .icon-disabled .img-responsive src=@{StaticR img_bar_icon_png} v-on:click="getPlaces('bar')">
             <div .col-xs-4 .col-sm-2>
-                <img #cafe .icon .icon-disabled .img-responsive src=@{StaticR img_cafe_icon_png}>
+                <img #cafe .icon .icon-disabled .img-responsive src=@{StaticR img_cafe_icon_png} v-on:click="getPlaces('cafe')">
             <div .col-xs-4 .col-sm-2>
-                <img #hotel .icon .icon-disabled .img-responsive src=@{StaticR img_hotel_icon_png}>
+                <img #hotel .icon .icon-disabled .img-responsive src=@{StaticR img_hotel_icon_png} v-on:click="getPlaces('hotel')">
             <div .col-xs-4 .col-sm-2>
-                <img #restaurant .icon .icon-disabled .img-responsive src=@{StaticR img_restaurant_icon_png}>
+                <img #restaurant .icon .icon-disabled .img-responsive src=@{StaticR img_restaurant_icon_png} v-on:click="getPlaces('restaurant')">
             <div .col-xs-4 .col-sm-2>
-                <img #museum .icon .icon-disabled .img-responsive src=@{StaticR img_museum_icon_png}>
+                <img #museum .icon .icon-disabled .img-responsive src=@{StaticR img_museum_icon_png} v-on:click="getPlaces('museum')">
             <div .col-xs-4 .col-sm-2>
-                <img #shop .icon .icon-disabled .img-responsive src=@{StaticR img_shop_icon_png}>
+                <img #shop .icon .icon-disabled .img-responsive src=@{StaticR img_shop_icon_png} v-on:click="getPlaces('shop')">
 
-<div #position .container-fluid>
-    <div .row>
+    <div #position .row>
         <div .col-sm-offset-2 .col-sm-8>
             <div #map .embed-responsive .embed-responsive-16by9>
 
-<div #places .container-fluid>
-    <div .row>
+    <div #places .row>
         <div .place .col-sm-offset-2 .col-sm-8>
             <div .place-info .col-sm-6>
                 <h4 .place-name>Place

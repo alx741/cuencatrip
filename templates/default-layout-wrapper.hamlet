@@ -25,6 +25,7 @@ $newline never
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/js-cookie/2.0.3/js.cookie.min.js">
 
     <script src=@{StaticR bower_bootstrap_js_bootstrap_min_js}>
+    <script src=@{StaticR bower_vue_vue_min_js}>
 
     <script>
       /* The `defaultCsrfMiddleware` Middleware added in Foundation.hs adds a CSRF token the request cookies. */

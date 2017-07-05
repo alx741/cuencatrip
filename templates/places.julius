@@ -54,67 +54,54 @@ function wipeMarkers()
     }
 }
 
-function getPlaces(place) {
-    var placeURL;
-    wipeMarkers();
 
-    switch (place)
+var app = new Vue
+({
+    el: '#vueapp',
+
+    methods:
     {
-        case "bar":
-            placeURL = "@{PlacesR Bar}"
-            break;
-        case "cafe":
-            placeURL = "@{PlacesR Cafe}"
-            break;
-        case "hotel":
-            placeURL = "@{PlacesR Hotel}"
-            break;
-        case "restaurant":
-            placeURL = "@{PlacesR Restaurant}"
-            break;
-        case "museum":
-            placeURL = "@{PlacesR Museum}"
-            break;
-        case "shop":
-            placeURL = "@{PlacesR Shop}"
-            break;
-        default:
-            placeURL = "@{HomeR}"
-    }
+        getPlaces: function (place)
+        {
+            var placeURL;
+            wipeMarkers();
 
-    $.getJSON(placeURL  + "?lat=" + userpos.lat + "&lng=" + userpos.lng,
-        function(data){
-            places = data;
-
-            for (var i = 0; i < places.length; i++)
+            switch (place)
             {
-                addMarker({lat: places[i].placeCoor.coorLat, lng: places[i].placeCoor.coorLng});
+                case "bar":
+                    placeURL = "@{PlacesR Bar}"
+                    break;
+                case "cafe":
+                    placeURL = "@{PlacesR Cafe}"
+                    break;
+                case "hotel":
+                    placeURL = "@{PlacesR Hotel}"
+                    break;
+                case "restaurant":
+                    placeURL = "@{PlacesR Restaurant}"
+                    break;
+                case "museum":
+                    placeURL = "@{PlacesR Museum}"
+                    break;
+                case "shop":
+                    placeURL = "@{PlacesR Shop}"
+                    break;
+                default:
+                    placeURL = "@{HomeR}"
             }
 
+            $.getJSON(placeURL  + "?lat=" + userpos.lat + "&lng=" + userpos.lng,
+                function(data){
+                    places = data;
+
+                    for (var i = 0; i < places.length; i++)
+                    {
+                        addMarker({lat: places[i].placeCoor.coorLat, lng: places[i].placeCoor.coorLng});
+                    }
+
+                }
+            );
         }
-    );
-}
 
-$("#bar").click(function() {
-    getPlaces("bar");
-});
-
-$("#cafe").click(function() {
-    getPlaces("cafe");
-});
-
-$("#hotel").click(function() {
-    getPlaces("hotel");
-});
-
-$("#restaurant").click(function() {
-    getPlaces("restaurant");
-});
-
-$("#museum").click(function() {
-    getPlaces("museum");
-});
-
-$("#shop").click(function() {
-    getPlaces("shop");
-});
+    }
+})
