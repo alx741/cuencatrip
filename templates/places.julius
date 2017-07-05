@@ -3,6 +3,14 @@ var map;
 var markers = [];
 
 function initMap() {
+    var mapStyle =
+    [
+        {
+            featureType: "poi",
+            stylers: [ { visibility: "off" } ]
+        }
+    ];
+
     map = new google.maps.Map(document.getElementById('map'), {
         zoom: 15,
         center: userpos,
@@ -12,14 +20,9 @@ function initMap() {
         rotateControl: false,
         streetViewControl: false,
         fullscreenControl: false,
-        zoomControl: true
+        zoomControl: true,
+        styles: mapStyle
     });
-
-    /* var marker = new google.maps.Marker({ */
-    /*     position: userpos, */
-    /*     map: map */
-    /* }); */
-    /* addMarker(userpos, map); */
 
     var radius = new google.maps.Circle({
         strokeColor: '#FF0000',
