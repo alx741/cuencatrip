@@ -29,9 +29,10 @@
 #places
     margin-top: 50px;
     .place
-        padding: 10px;
-        border: solid 2px #ffc400;
         border-radius: 5px;
+        border: solid 2px #ffc400;
+        margin-bottom: 20px;
+        padding: 10px;
     .place-name
         font-size: 1.5em;
         font-weight: bold;

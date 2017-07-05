@@ -59,6 +59,11 @@ var app = new Vue
 ({
     el: '#vueapp',
 
+    data:
+    {
+        places: []
+    },
+
     methods:
     {
         getPlaces: function (place)
@@ -92,13 +97,13 @@ var app = new Vue
 
             $.getJSON(placeURL  + "?lat=" + userpos.lat + "&lng=" + userpos.lng,
                 function(data){
-                    places = data;
+                    app.places = data;
 
-                    for (var i = 0; i < places.length; i++)
+                    for (var i = 0; i < app.places.length; i++)
                     {
-                        addMarker({lat: places[i].placeCoor.coorLat, lng: places[i].placeCoor.coorLng});
+                        addMarker({lat: app.places[i].placeCoor.coorLat,
+                                lng: app.places[i].placeCoor.coorLng});
                     }
-
                 }
             );
         }
