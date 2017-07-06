@@ -23,6 +23,8 @@
         padding: 10px;
     .icon:hover
         filter: grayscale(0);
+    .icon-enabled
+        filter: grayscale(0);
     .icon-disabled
         filter: grayscale(100);
 

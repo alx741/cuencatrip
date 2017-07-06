@@ -66,10 +66,19 @@ var app = new Vue
 
     methods:
     {
-        getPlaces: function (place)
+        switchIcon: function (event)
+        {
+            var target = event.target;
+            $('.icon').addClass("icon-disabled");
+            $(target).removeClass("icon-disabled");
+            $(target).addClass("icon-enabled");
+        },
+
+        getPlaces: function (place, event)
         {
             var placeURL;
             wipeMarkers();
+            app.switchIcon(event);
 
             switch (place)
             {
