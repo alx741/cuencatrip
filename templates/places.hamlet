@@ -27,20 +27,20 @@
                 <img #shop .icon .icon-disabled .img-responsive src=@{StaticR img_shop_icon_png}
                     v-on:click="getPlaces('shop', $event)">
 
-    <div #position .row>
-        <div .col-sm-offset-2 .col-sm-8>
+    <div .row>
+        <div #position .col-sm-6>
             <div #map .embed-responsive .embed-responsive-16by9>
 
-    <div #places .row>
-        <div .place .col-sm-offset-2 .col-sm-8 v-for="place in places">
-            <div .place-info .col-sm-6>
-                <h4 .place-name>{{ place.placeName }}
-                <span .place-rating>Calificación: {{ place.placeRating }}
-            <div .place-stars .col-sm-6>
-                <img .star1 .star .star-disabled src=@{StaticR img_star_png}>
-                <img .star2 .star .star-disabled src=@{StaticR img_star_png}>
-                <img .star3 .star .star-disabled src=@{StaticR img_star_png}>
-                <img .star4 .star .star-disabled src=@{StaticR img_star_png}>
-                <img .star5 .star .star-disabled src=@{StaticR img_star_png}>
+        <div #places .col-sm-6>
+            <div .place .row v-for="place in places">
+                <div .place-info .col-sm-6>
+                    <h4 .place-name>{{ place.placeName }}
+                    <span .place-rating>Calificación: {{ place.placeRating }}
+                <div .place-stars .col-sm-6>
+                    <img .star1 .star .star-disabled src=@{StaticR img_star_png}>
+                    <img .star2 .star .star-disabled src=@{StaticR img_star_png}>
+                    <img .star3 .star .star-disabled src=@{StaticR img_star_png}>
+                    <img .star4 .star .star-disabled src=@{StaticR img_star_png}>
+                    <img .star5 .star .star-disabled src=@{StaticR img_star_png}>
 
 <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCejW_WHaj2r4zCeLy8iB7gOsiLly_YgcU&callback=initMap">

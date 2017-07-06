@@ -29,10 +29,9 @@
         filter: grayscale(100);
 
 #places
-    margin-top: 50px;
+    margin: 0px;
     .place
-        border-radius: 5px;
-        border: solid 2px #ffc400;
+        border-bottom: solid 2px #ffc400;
         margin-bottom: 20px;
         padding: 10px;
     .place-name
