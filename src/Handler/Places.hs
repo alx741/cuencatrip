@@ -29,6 +29,7 @@ data PlaceData = PlaceData
     { placeId :: Int64
     , placeName :: Text
     , placeCoor :: Coordinate
+    , placeRaters :: Int64
     , placeRating :: Float
     } deriving (Generic, Show)
 
@@ -44,6 +45,41 @@ data Coordinate = Coordinate
 instance ToJSON Coordinate
 instance FromJSON Coordinate
 
+getRatePlaceR :: Place -> Int64 -> Int -> Handler Value
+getRatePlaceR place gid rating = do
+    -- Obtain place
+    let getPlaceSql = "select gid, name, raters, rating, ST_AsText("
+            ++ geog place ++ ")  from " ++ isOnTable place
+            ++ " where gid=" ++ pack (show gid)
+
+    queryResult <- runDB $ rawQuery getPlaceSql [] $$ CL.consume
+
+    placeData <- case headMay $ fmap getPlaceData queryResult of
+            Nothing -> redirect HomeR
+            Just x -> return $ x
+
+
+    -- Bump place rating
+    let bumpedPlace = placeData { placeRating =
+        rate (placeRating placeData) (placeRaters placeData) rating }
+
+    let updatePlaceSql = "update " ++ isOnTable place ++ " set rating="
+            ++ pack (show (placeRating bumpedPlace))
+            ++ ", raters=" ++ pack (show (placeRaters placeData + 1))
+            ++ " where gid=" ++ pack (show gid)
+
+    _ <-  runDB $ rawExecute updatePlaceSql []
+
+    return $ toJSON ("done" :: Text)
+
+
+rate :: Float -> Int64 -> Int -> Float
+rate currentRating raters raiting =
+    ((raters' * currentRating) + raiting') / (raters' + 1.0)
+    where
+        raters' = fromIntegral raters
+        raiting' = fromIntegral raiting
+
 getPlacesR :: Place -> Handler Value
 getPlacesR place = do
     (lng, lat) <- coordParam
@@ -54,24 +90,24 @@ getPlacesR place = do
             ++ " AND " ++ Place.filter place
     queryResult <- runDB $ rawQuery sql [] $$ CL.consume
     return $ toJSON $ fmap getPlaceData queryResult
-    where
-        getPlaceData :: [PersistValue] -> PlaceData
-        getPlaceData
-            ( PersistInt64 gid
-            : PersistText name
-            : _
-            : PersistRational rating
-            : PersistText coor
-            : _
-            ) =
-            PlaceData gid name (parseCoordinate coor) $ fromRational rating
-        getPlaceData _ = error "Malformed GeoDB row"
 
-        parseCoordinate :: Text -> Coordinate
-        parseCoordinate coorText =
-            case parse coordinateParser "" coorText of
-                    Left e -> error $ show e
-                    Right coor -> coor
+getPlaceData :: [PersistValue] -> PlaceData
+getPlaceData
+    ( PersistInt64 gid
+    : PersistText name
+    : PersistInt64 raters
+    : PersistRational rating
+    : PersistText coor
+    : _
+    ) =
+    PlaceData gid name (parseCoordinate coor) raters $ fromRational rating
+getPlaceData _ = error "Malformed GeoDB row"
+
+parseCoordinate :: Text -> Coordinate
+parseCoordinate coorText =
+    case parse coordinateParser "" coorText of
+            Left e -> error $ show e
+            Right coor -> coor
 
 coordinateParser :: Parser Coordinate
 coordinateParser = do

@@ -8,6 +8,7 @@
 /cuenca CuencaR GET
 
 /places/#Place PlacesR GET
+!/places/#Place/#Int64/#Int RatePlaceR GET
 
 /comments CommentR POST
 
