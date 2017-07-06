@@ -26,7 +26,8 @@ radius :: Int
 radius = 1000
 
 data PlaceData = PlaceData
-    { placeName :: Text
+    { placeId :: Int64
+    , placeName :: Text
     , placeCoor :: Coordinate
     , placeRating :: Float
     } deriving (Generic, Show)
@@ -46,7 +47,7 @@ instance FromJSON Coordinate
 getPlacesR :: Place -> Handler Value
 getPlacesR place = do
     (lng, lat) <- coordParam
-    let sql = "select name, raters, rating, ST_AsText("
+    let sql = "select gid, name, raters, rating, ST_AsText("
             ++ geog place ++ ") from " ++ isOnTable place
             ++ " where ST_Distance(" ++ geog place ++ ", ST_Point("
             ++ lng ++ ", " ++ lat ++ ")) < " ++ pack (show radius)
@@ -55,8 +56,15 @@ getPlacesR place = do
     return $ toJSON $ fmap getPlaceData queryResult
     where
         getPlaceData :: [PersistValue] -> PlaceData
-        getPlaceData (PersistText name : _ : PersistRational rating : PersistText coor : _) =
-            PlaceData name (parseCoordinate coor) $ fromRational rating
+        getPlaceData
+            ( PersistInt64 gid
+            : PersistText name
+            : _
+            : PersistRational rating
+            : PersistText coor
+            : _
+            ) =
+            PlaceData gid name (parseCoordinate coor) $ fromRational rating
         getPlaceData _ = error "Malformed GeoDB row"
 
         parseCoordinate :: Text -> Coordinate
