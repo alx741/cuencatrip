@@ -61,6 +61,7 @@ var app = new Vue
 
     data:
     {
+        placeType: "",
         places: []
     },
 
@@ -74,33 +75,52 @@ var app = new Vue
             $(target).addClass("icon-enabled");
         },
 
+        ratePlace: function(id, stars)
+        {
+            var rateUrl = "/places/" + app.placeType + "/" + id + "/" + stars
+            $.getJSON(rateUrl,
+                function(data){
+                    console.log(data);
+                }
+            );
+
+            app.getPlaces(app.placeType, null);
+        },
+
         getPlaces: function (place, event)
         {
             var placeURL;
             wipeMarkers();
-            app.switchIcon(event);
+            if (event != null) { app.switchIcon(event); }
 
             switch (place)
             {
-                case "bar":
+                case "Bar":
+                    app.placeType = "Bar"
                     placeURL = "@{PlacesR Bar}"
                     break;
-                case "cafe":
+                case "Cafe":
+                    app.placeType = "Cafe"
                     placeURL = "@{PlacesR Cafe}"
                     break;
-                case "hotel":
+                case "Hotel":
+                    app.placeType = "Hotel"
                     placeURL = "@{PlacesR Hotel}"
                     break;
-                case "restaurant":
+                case "Restaurant":
+                    app.placeType = "Restaurant"
                     placeURL = "@{PlacesR Restaurant}"
                     break;
-                case "museum":
+                case "Museum":
+                    app.placeType = "Museum"
                     placeURL = "@{PlacesR Museum}"
                     break;
-                case "shop":
+                case "Shop":
+                    app.placeType = "Shop"
                     placeURL = "@{PlacesR Shop}"
                     break;
                 default:
+                    app.placeType = ""
                     placeURL = "@{HomeR}"
             }
 
